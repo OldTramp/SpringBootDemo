@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @RepositoryRestResource(path = "/workers")
-//@Repository
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByLastNameContainingIgnoreCase(String lastName);

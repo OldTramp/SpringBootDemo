@@ -1,14 +1,24 @@
 package com.example.demo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javax.persistence.*;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
 
     public Employee() {}
+
+    public Employee(String firstName, String lastName, String position, Manager manager) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.manager = manager;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +27,19 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String position;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "managerId")
+    private Manager manager;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -40,5 +63,13 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

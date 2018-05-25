@@ -5,7 +5,9 @@ import com.example.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,15 +27,41 @@ public class EmployeeController {
     public Optional<Employee> getEmployee(@PathVariable long id) {
         return employeeRepository.findById(id);
     }
+
     //TODO /search/byLastName ???
     @GetMapping("/filter/byLastName")
     public List<Employee> getEmployeeByLastName(@RequestParam String lastName) {
         return employeeRepository.findByLastNameContainingIgnoreCase(lastName);
     }
 
+    @PostMapping("")
+    public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
+        Employee savedEmployee = employeeRepository.save(employee);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(savedEmployee.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee, @PathVariable long id) {
+
+        Optional<Employee> employeeOptional = employeeRepository.findById(id);
+
+        if (!employeeOptional.isPresent())
+            return ResponseEntity.notFound().build();
+
+        employee.setId(id);
+        employeeRepository.save(employee);
+
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable long id) {
+    public ResponseEntity<Object> deleteEmployee(@PathVariable long id) {
         employeeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/fake")
