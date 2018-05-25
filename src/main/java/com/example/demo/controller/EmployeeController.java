@@ -4,6 +4,8 @@ import com.example.demo.domain.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,7 @@ public class EmployeeController {
     }
 
     @PostMapping("")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Successfully created")})
     public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
         Employee savedEmployee = employeeRepository.save(employee);
 
@@ -49,6 +52,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
+    @ApiResponses(value = {@ApiResponse(code = 204, message = "Successfully updated")})
     public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee, @PathVariable long id) {
 
         Optional<Employee> employeeOptional = employeeRepository.findById(id);
@@ -63,6 +67,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiResponses(value = {@ApiResponse(code = 204, message = "Successfully deleted")})
     public ResponseEntity<Object> deleteEmployee(@PathVariable long id) {
         employeeRepository.deleteById(id);
         return ResponseEntity.noContent().build();
