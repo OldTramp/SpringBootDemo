@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.Employee;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.domain.Manager;
+import com.example.demo.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +12,11 @@ import java.util.List;
 public class ManagerController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private ManagerRepository managerRepository;
 
     @GetMapping("")
-    public List<Employee> getAllManagers() {
-        return employeeRepository.findAll();
+    public List<Manager> getAllManagers() {
+        return managerRepository.findAll();
     }
 
 }
