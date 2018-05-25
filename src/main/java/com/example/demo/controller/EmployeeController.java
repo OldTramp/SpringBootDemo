@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Employee;
 import com.example.demo.repository.EmployeeRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
+@Api(value="Employees operations", description="Operations with Employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
     @GetMapping("")
+    @ApiOperation(value = "View a list of available Employees", response = List.class)
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
@@ -28,8 +32,8 @@ public class EmployeeController {
         return employeeRepository.findById(id);
     }
 
-    //TODO /search/byLastName ???
     @GetMapping("/filter/byLastName")
+    @ApiOperation(value = "Filter Employees by partial last name", response = List.class)
     public List<Employee> getEmployeeByLastName(@RequestParam String lastName) {
         return employeeRepository.findByLastNameContainingIgnoreCase(lastName);
     }
