@@ -6,6 +6,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
+
 @NoRepositoryBean
 public interface CommonEmployeeRepository<T extends Employee> extends JpaRepository<T, Long> {
 
