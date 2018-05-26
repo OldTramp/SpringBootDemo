@@ -14,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
@@ -34,8 +33,8 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Person> getPerson(@PathVariable long id) {
-        return personRepository.findById(id);
+    public Person getPerson(@PathVariable long id) {
+        return personRepository.getOne(id);
     }
 
     @GetMapping("/filter/byName")
@@ -53,8 +52,7 @@ public class PersonController {
     @GetMapping("/search")
     @ApiOperation(value = "Full text search", response = List.class)
     public List<Person> search(@RequestParam String q) {
-        List<Person> searchResults = personSearch.search(q);
-        return searchResults;
+        return personSearch.search(q);
     }
 
     @PostMapping("")
@@ -71,9 +69,9 @@ public class PersonController {
     @PutMapping("/{id}")
     @ApiResponses(value = {@ApiResponse(code = 204, message = "Successfully updated")})
     public ResponseEntity<Object> updatePerson(@RequestBody Person person, @PathVariable long id) {
-        Optional<Person> personOptional = personRepository.findById(id);
+        Person dbEntity = personRepository.getOne(id);
 
-        if (!personOptional.isPresent())
+        if (dbEntity != null)
             return ResponseEntity.notFound().build();
 
         person.setId(id);
@@ -85,7 +83,7 @@ public class PersonController {
     @DeleteMapping("/{id}")
     @ApiResponses(value = {@ApiResponse(code = 204, message = "Successfully deleted")})
     public ResponseEntity<Object> deletePerson(@PathVariable long id) {
-        personRepository.deleteById(id);
+        personRepository.delete(id);
         return ResponseEntity.noContent().build();
     }
 

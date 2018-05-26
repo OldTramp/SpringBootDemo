@@ -1,7 +1,10 @@
 package com.example.demo.domain;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 
+@BatchSize(size=20)
 @Entity
 public class Address {
 

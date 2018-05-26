@@ -2,9 +2,9 @@ package com.example.demo.domain;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -27,8 +27,6 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
-//    @SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
     private long id;
 
     @Field
@@ -52,6 +50,7 @@ public class Person {
     @Column(name = "birth_date")
     private Date birthDate;
 
+    //TODO ConstraintViolationException in spring rest
     @Field
     @Pattern(regexp="[A-Za-z0-9._%-+]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
     private String email;
