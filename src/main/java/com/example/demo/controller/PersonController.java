@@ -34,7 +34,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public Person getPerson(@PathVariable long id) {
-        return personRepository.getOne(id);
+        return personRepository.findOne(id);
     }
 
     @GetMapping("/filter/byName")
@@ -72,9 +72,9 @@ public class PersonController {
     @PutMapping("/{id}")
     @ApiResponses(value = {@ApiResponse(code = 204, message = "Successfully updated")})
     public ResponseEntity<Object> updatePerson(@RequestBody Person person, @PathVariable long id) {
-        Person dbEntity = personRepository.getOne(id);
+        Person dbEntity = personRepository.findOne(id);
 
-        if (dbEntity != null)
+        if (dbEntity == null)
             return ResponseEntity.notFound().build();
 
         person.setId(id);
