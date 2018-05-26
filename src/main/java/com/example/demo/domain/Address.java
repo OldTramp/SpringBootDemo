@@ -7,6 +7,15 @@ public class Address {
 
     public Address() {}
 
+    public Address(String zipCode, String country, String city, String street, String building, String apartment) {
+        this.zipCode = zipCode;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.building = building;
+        this.apartment = apartment;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

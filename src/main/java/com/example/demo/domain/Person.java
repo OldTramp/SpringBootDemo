@@ -14,6 +14,17 @@ public class Person {
 
     public Person() {}
 
+    public Person(String firstName, String lastName, String account,
+                  String occupation, Date birthDate, String email, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.account = account;
+        this.occupation = occupation;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.address = address;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
