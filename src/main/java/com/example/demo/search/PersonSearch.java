@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.search;
 
 
 import com.example.demo.domain.Person;
@@ -31,7 +31,10 @@ public class PersonSearch {
 
         Query query = queryBuilder
                 .keyword()
-                .onFields("firstName")//, "lastName", "email", "account"
+                .fuzzy()
+                .withEditDistanceUpTo(1)
+                .withPrefixLength(2)
+                .onFields("firstName", "lastName", "email", "account")
                 .matching(text)
                 .createQuery();
 

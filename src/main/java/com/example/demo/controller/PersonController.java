@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Person;
 import com.example.demo.repository.PersonRepository;
-import com.example.demo.repository.PersonSearch;
+import com.example.demo.search.PersonSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.search;
 
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
