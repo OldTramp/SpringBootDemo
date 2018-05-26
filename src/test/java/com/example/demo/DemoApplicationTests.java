@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.controller.EmployeeController;
+import com.example.demo.controller.PersonController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DemoApplicationTests {
 
 	@Autowired
-	private EmployeeController employeeController;
+	private PersonController personController;
 
 	@Test
 	public void contextLoads() {
-		assertThat(employeeController).isNotNull();
+		assertThat(personController).isNotNull();
 	}
 
 }
