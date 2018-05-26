@@ -50,7 +50,10 @@ public class PersonController {
     }
 
     @GetMapping("/search")
-    @ApiOperation(value = "Full text search", response = List.class)
+    @ApiOperation(value = "Full text search", response = List.class, notes =
+            "Search with distance 1 on fields firstName, lastName, email and account. " +
+                    "Returns person when at least one of the listed fields contains one of the requested words. " +
+                    "Fuzziness is not applied to first two characters of the words, thus they must be correct.")
     public List<Person> search(@RequestParam String q) {
         return personSearch.search(q);
     }

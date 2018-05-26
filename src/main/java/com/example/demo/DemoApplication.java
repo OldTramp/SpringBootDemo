@@ -37,7 +37,7 @@ public class DemoApplication {
 							new Address("143350", "Russia", "Moscow", "Lenina", "12", "3")));
 
 			personRepository.save(
-					new Person("Stepan", "Ivanov", "AA1", "Manager", formatter.parse("1975-03-30"), "stiv@mail.ru",
+					new Person("Stepan", "Ivanov", "AС3", "Manager", formatter.parse("1975-03-30"), "stiv@mail.ru",
 							new Address("143350", "Russia", "Moscow", "Lenina", "12", "5")));
 		};
 	}
